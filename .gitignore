@@ -1,0 +1,8 @@
+.env
+.user
+_Store
+.AppleDouble
+.LSOverride
+*.ifc
+*.brep
+*.ipynb
