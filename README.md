@@ -8,6 +8,13 @@ simulate scanning a model
 sudo pip install git+git://github.com/nicolaiarocci/eve.git
 sudo pip install python-dotenv==0.5.0 pyjwt
 
+### install trimesh and its required libs
+sudo apt-get install cmake openscad blender libspatialindex-dev libgeos-dev -y
+sudo pip install trimesh[all]
+
+### install pandas
+conda install pandas -y
+
 ### setup credentials in env
 touch .env
 

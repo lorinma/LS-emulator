@@ -37,4 +37,5 @@ X_HEADERS=['Content-Type','IF-Match']
                
 DOMAIN= {
     'entity': schema.entity_resource,
+    'scanner': schema.scanner_resource,
 }

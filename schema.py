@@ -36,3 +36,36 @@ entity_resource = {
     'item_title': 'Entity',
     'schema': entity_schema,
 }
+
+scanner_schema = {
+    'TrimbleVersionID': {'type':'string'},
+    'CS_X': {
+        'type':'list',
+        'schema':{
+            'type': 'number'
+        }
+    },
+    'CS_Y': { # Up direction
+        'type':'list',
+        'schema':{
+            'type': 'number'
+        }
+    },
+    'CS_Z': { # camera/look at direction
+        'type':'list',
+        'schema':{
+            'type': 'number'
+        }
+    },
+    'CS_Origin': { # camera position
+        'type':'list',
+        'schema':{
+            'type': 'number'
+        }
+    }
+}
+
+scanner_resource = {
+    'item_title': 'Scanner',
+    'schema': scanner_schema,
+}
