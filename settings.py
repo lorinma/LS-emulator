@@ -31,7 +31,6 @@ ITEM_METHODS= ['GET', 'PATCH', 'PUT', 'DELETE']
 EMBEDDING= True
 X_DOMAINS= '*'
 X_HEADERS=['Content-Type','IF-Match']
-
 # default 25
 # PAGINATION_DEFAULT=500
                

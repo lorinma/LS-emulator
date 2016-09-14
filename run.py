@@ -25,12 +25,40 @@ load_dotenv(dotenv_path)
 from util_scanner import Scanner
 
 from eve import Eve
-app = Eve()
 
+from flask import send_from_directory
+import numpy as np
+
+app = Eve(__name__)
+
+# host pcd files
+@app.route('/file/<fid>')
+def hello_world(fid):
+    return send_from_directory('pcd', fid+'.pcd', as_attachment=True)
 
 ###########################################
 # get all the features, the pairwise feature's value is reversed, this helps front end viewer to easily hide these objects 
 # app.on_fetched_resource_entityList+=get_entity_list
+
+def add_scan(items):
+    for item in items:
+        entities = get_internal('entity',**{'TrimbleVersionID': item['TrimbleVersionID']})[0]['_items']
+        
+        # get scanner view
+        viewer={
+            'x':item['CS_X'],
+            'y':item['CS_Y'],
+            'z':item['CS_Z'],
+            'loc':item['CS_Origin']
+        }
+        l2g=np.array([viewer['x'],viewer['y'],viewer['z'],viewer['loc']]).transpose()
+        l2g=np.concatenate((l2g,[[0,0,0,1]]),0)
+        print(l2g)
+        scanner=Scanner()
+        points=scanner.scan(l2g,entities,item['Resolution'])
+        scanner.savePCD(points,item['TrimbleVersionID'],str(item['_id']),l2g)
+        
+app.on_inserted_scanner+=add_scan
 
 if __name__ == '__main__':
     # app.run()

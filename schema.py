@@ -62,10 +62,19 @@ scanner_schema = {
         'schema':{
             'type': 'number'
         }
-    }
+    },
+    'Resolution': {'type': 'number'}
 }
 
 scanner_resource = {
     'item_title': 'Scanner',
     'schema': scanner_schema,
+    'extra_response_fields':[
+        'TrimbleVersionID',
+        'CS_X',
+        'CS_Y',
+        'CS_Z',
+        'CS_Origin',
+        'Resolution'
+        ]
 }
