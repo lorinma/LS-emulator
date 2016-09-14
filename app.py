@@ -7,23 +7,21 @@ import numpy as np
 from pymongo import MongoClient
 from bson import ObjectId
 from util_scanner import Scanner
-
+dotenv_path = '.env'
+load_dotenv(dotenv_path)
+MONGO_HOST= os.environ.get('MONGO_HOST')
+MONGO_PORT= os.environ.get('MONGO_PORT')
+MONGO_USERNAME= os.environ.get('MONGO_USERNAME')
+MONGO_PASSWORD= os.environ.get('MONGO_PASSWORD')
+MONGO_DBNAME= os.environ.get('MONGO_DBNAME')
+client = MongoClient(MONGO_HOST,int(MONGO_PORT))
+db = client[MONGO_DBNAME]
+db.authenticate(MONGO_USERNAME, MONGO_PASSWORD, source=MONGO_DBNAME)
+    
 app = Flask(__name__)
 
 @app.route('/scan/<scanner_id>')
 def scan(scanner_id):
-    dotenv_path = '.env'
-    load_dotenv(dotenv_path)
-    MONGO_HOST= os.environ.get('MONGO_HOST')
-    MONGO_PORT= os.environ.get('MONGO_PORT')
-    MONGO_USERNAME= os.environ.get('MONGO_USERNAME')
-    MONGO_PASSWORD= os.environ.get('MONGO_PASSWORD')
-    MONGO_DBNAME= os.environ.get('MONGO_DBNAME')
-    
-    client = MongoClient(MONGO_HOST,int(MONGO_PORT))
-    db = client[MONGO_DBNAME]
-    db.authenticate(MONGO_USERNAME, MONGO_PASSWORD, source=MONGO_DBNAME)
-    
     scanner_data=db["scanner"].find_one({"_id":ObjectId(scanner_id)})
     TrimbleVersionID=scanner_data["TrimbleVersionID"]
     entities=db["entity"].find({"TrimbleVersionID":TrimbleVersionID})
@@ -43,7 +41,7 @@ def scan(scanner_id):
     
 @app.route('/file/<fid>')
 def download_pcd(fid):
-    return send_from_directory('pcd', fid+'.pcd', as_attachment=True)
+    return send_from_directory('', fid+'.pcd', as_attachment=True)
     
 if __name__ == '__main__':
     app.run(host=os.environ['IP'],port=int(os.environ['PORT']),debug=True)
