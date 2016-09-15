@@ -1,0 +1,12 @@
+web:
+  image: lorinma/eastbim-python
+  # image: quay.io/lorinma/pyeastbim
+  command: python -u app.py
+  ports:
+    - "80:5000"
+  volumes:
+    - .:/web
+  links:
+    - db
+db:
+  image: mongo:3.0.2
