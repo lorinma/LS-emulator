@@ -66,7 +66,7 @@ class Scanner:
         PCD_transformed = trimesh.transformations.transform_points(PCD['Point'].tolist(), l2g).tolist()
         PCD['Point']=PCD_transformed
         PCD['TrimbleVersionID']=TrimbleVersionID
-        pcd_file=_id+'.pcd'
+        pcd_file='static/'+_id+'.pcd'
         count=len(PCD)
         if 1:
             f = open(pcd_file,'w')

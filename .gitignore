@@ -1,4 +1,4 @@
-pcd/*
+static/*.pcd
 .env
 .user
 _Store
