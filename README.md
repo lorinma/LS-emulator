@@ -6,7 +6,7 @@ simulate scanning a model
 
 ### nstall eve
 sudo pip install git+git://github.com/nicolaiarocci/eve.git
-sudo pip install python-dotenv==0.5.0 pyjwt
+sudo pip install python-dotenv==0.5.0
 
 ### install trimesh and its required libs
 sudo apt-get install cmake openscad blender libspatialindex-dev libgeos-dev -y
